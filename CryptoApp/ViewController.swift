@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var widgetCollection: UICollectionView!
     
     @IBOutlet weak var cryptoTableView: UITableView!
+    @IBOutlet weak var cryptoSearchBar: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
@@ -20,6 +21,7 @@ class ViewController: UIViewController {
     }
     
     private var cryptoDatas: CryptoDatas?
+    private var filteredCryptoDatas: [CryptoData] = []
     private var favourites: [String] = ["bitcoin", "ethereum", "tether"]
     private func setupUI(){
         
@@ -27,6 +29,8 @@ class ViewController: UIViewController {
         widgetCollection.dataSource = self
         cryptoTableView.delegate = self
         cryptoTableView.dataSource = self
+        cryptoSearchBar.delegate = self
+        
         
         widgetCollection.register(.init(nibName: "FavouritesWidget", bundle: nil), forCellWithReuseIdentifier: "FavouritesWidget")
         
@@ -56,6 +60,7 @@ class ViewController: UIViewController {
                     let decodedData = try JSONDecoder().decode(CryptoDatas.self, from: data)
                     print(decodedData)
                     self.cryptoDatas = decodedData
+                    self.filteredCryptoDatas = decodedData.data ?? []
                     DispatchQueue.main.async {
                         self.widgetCollection.reloadData()
                         self.cryptoTableView.reloadData()
@@ -87,14 +92,14 @@ extension ViewController: UITableViewDelegate{
 
 extension ViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cryptoDatas?.data?.count ?? 0
+        return filteredCryptoDatas.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CryptoTableViewCell", for: indexPath) as! CryptoTableViewCell
         
-        cell.nameLabel.text = cryptoDatas?.data![indexPath.item].name
-        cell.updatePercentageSection(percentage: (cryptoDatas?.data![indexPath.item].changePercent24Hr)!)
+        cell.nameLabel.text = filteredCryptoDatas[indexPath.item].name
+        cell.updatePercentageSection(percentage: (filteredCryptoDatas[indexPath.item].changePercent24Hr)!)
         
         cell.backgroundColor = .systemGray6
         return cell
@@ -136,7 +141,19 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: 140, height: 140)
     }
-    
-    
-    
+}
+
+extension ViewController: UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.count < 2{
+            filteredCryptoDatas = cryptoDatas?.data ?? []
+        } else {
+            filteredCryptoDatas = cryptoDatas?.data?.filter{$0.name?.lowercased().contains(searchText.lowercased()) ?? false} ?? []
+        }
+        
+        DispatchQueue.main.async {
+            self.cryptoTableView.reloadData()
+        }
+    }
 }

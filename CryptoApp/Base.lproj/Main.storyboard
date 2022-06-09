@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="D0O-GX-Wfi">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="308"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="351"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Favourites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4H-Nk-I9D">
@@ -54,23 +54,35 @@
                                             </cells>
                                         </collectionView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cryptos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fk6-9p-p4a">
-                                            <rect key="frame" x="57" y="237" width="128.5" height="51"/>
+                                            <rect key="frame" x="57" y="237" width="128.5" height="47"/>
                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="36"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <searchBar contentMode="redraw" barStyle="blackTranslucent" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="xwG-Lr-7CK">
+                                            <rect key="frame" x="32" y="300" width="350" height="51"/>
+                                            <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                            <color key="tintColor" systemColor="labelColor"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <scopeButtonTitles>
+                                                <string>Title</string>
+                                            </scopeButtonTitles>
+                                        </searchBar>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemGray6Color"/>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="xwG-Lr-7CK" secondAttribute="bottom" id="51Y-vJ-wJg"/>
                                         <constraint firstItem="k3Q-hn-bct" firstAttribute="top" secondItem="E4H-Nk-I9D" secondAttribute="bottom" constant="20" id="7uN-Tw-yUw"/>
+                                        <constraint firstItem="xwG-Lr-7CK" firstAttribute="leading" secondItem="D0O-GX-Wfi" secondAttribute="leading" constant="32" id="97X-5p-06Q"/>
                                         <constraint firstItem="fk6-9p-p4a" firstAttribute="top" secondItem="k3Q-hn-bct" secondAttribute="bottom" constant="20" id="Ccm-sT-8r1"/>
-                                        <constraint firstAttribute="bottom" secondItem="fk6-9p-p4a" secondAttribute="bottom" constant="20" id="DgL-zg-2Ns"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="E4H-Nk-I9D" secondAttribute="trailing" constant="20" symbolic="YES" id="JIH-a6-sc3"/>
                                         <constraint firstItem="E4H-Nk-I9D" firstAttribute="top" secondItem="D0O-GX-Wfi" secondAttribute="top" id="Lca-l1-JwP"/>
                                         <constraint firstAttribute="trailing" secondItem="k3Q-hn-bct" secondAttribute="trailing" id="Of7-OB-Rq0"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fk6-9p-p4a" secondAttribute="trailing" symbolic="YES" id="c1A-RF-meg"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fk6-9p-p4a" secondAttribute="trailing" constant="20" symbolic="YES" id="c1A-RF-meg"/>
                                         <constraint firstItem="k3Q-hn-bct" firstAttribute="leading" secondItem="D0O-GX-Wfi" secondAttribute="leading" constant="32" id="fVe-gt-Z6b"/>
                                         <constraint firstItem="E4H-Nk-I9D" firstAttribute="leading" secondItem="D0O-GX-Wfi" secondAttribute="leading" constant="57" id="gCZ-5L-Cux"/>
+                                        <constraint firstAttribute="trailing" secondItem="xwG-Lr-7CK" secondAttribute="trailing" constant="32" id="hnb-CD-ig7"/>
+                                        <constraint firstItem="xwG-Lr-7CK" firstAttribute="top" secondItem="fk6-9p-p4a" secondAttribute="bottom" constant="16" id="sBf-Tj-VXh"/>
                                         <constraint firstItem="fk6-9p-p4a" firstAttribute="leading" secondItem="D0O-GX-Wfi" secondAttribute="leading" constant="57" id="yKL-JP-npc"/>
                                     </constraints>
                                 </view>
@@ -86,6 +98,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cryptoSearchBar" destination="xwG-Lr-7CK" id="MUH-9z-DW0"/>
                         <outlet property="cryptoTableView" destination="eXQ-ut-b5c" id="VTp-26-elB"/>
                         <outlet property="widgetCollection" destination="k3Q-hn-bct" id="TJs-9R-wQc"/>
                     </connections>
@@ -96,6 +109,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
