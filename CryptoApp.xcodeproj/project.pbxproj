@@ -7,15 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00554849284FA08F00DCEE1E /* CryptoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00554847284FA08F00DCEE1E /* CryptoTableViewCell.swift */; };
+		0055484A284FA08F00DCEE1E /* CryptoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00554848284FA08F00DCEE1E /* CryptoTableViewCell.xib */; };
+		007A839528512B1D00D29B73 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007A839428512B1D00D29B73 /* Data.swift */; };
 		008E00EB284E09170044C19F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E00EA284E09170044C19F /* AppDelegate.swift */; };
 		008E00ED284E09170044C19F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E00EC284E09170044C19F /* SceneDelegate.swift */; };
 		008E00EF284E09170044C19F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E00EE284E09170044C19F /* ViewController.swift */; };
 		008E00F2284E09170044C19F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 008E00F0284E09170044C19F /* Main.storyboard */; };
 		008E00F4284E091C0044C19F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 008E00F3284E091C0044C19F /* Assets.xcassets */; };
 		008E00F7284E091C0044C19F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 008E00F5284E091C0044C19F /* LaunchScreen.storyboard */; };
+		008E0104284E0E750044C19F /* FavouritesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E0102284E0E750044C19F /* FavouritesWidget.swift */; };
+		008E0105284E0E750044C19F /* FavouritesWidget.xib in Resources */ = {isa = PBXBuildFile; fileRef = 008E0103284E0E750044C19F /* FavouritesWidget.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00554847284FA08F00DCEE1E /* CryptoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTableViewCell.swift; sourceTree = "<group>"; };
+		00554848284FA08F00DCEE1E /* CryptoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CryptoTableViewCell.xib; sourceTree = "<group>"; };
+		007A839428512B1D00D29B73 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		008E00E7284E09170044C19F /* CryptoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		008E00EA284E09170044C19F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		008E00EC284E09170044C19F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +32,8 @@
 		008E00F3284E091C0044C19F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		008E00F6284E091C0044C19F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		008E00F8284E091C0044C19F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		008E0102284E0E750044C19F /* FavouritesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesWidget.swift; sourceTree = "<group>"; };
+		008E0103284E0E750044C19F /* FavouritesWidget.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouritesWidget.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +50,10 @@
 		008E00DE284E09170044C19F = {
 			isa = PBXGroup;
 			children = (
+				00554847284FA08F00DCEE1E /* CryptoTableViewCell.swift */,
+				00554848284FA08F00DCEE1E /* CryptoTableViewCell.xib */,
+				008E0102284E0E750044C19F /* FavouritesWidget.swift */,
+				008E0103284E0E750044C19F /* FavouritesWidget.xib */,
 				008E00E9284E09170044C19F /* CryptoApp */,
 				008E00E8284E09170044C19F /* Products */,
 			);
@@ -63,6 +77,7 @@
 				008E00F3284E091C0044C19F /* Assets.xcassets */,
 				008E00F5284E091C0044C19F /* LaunchScreen.storyboard */,
 				008E00F8284E091C0044C19F /* Info.plist */,
+				007A839428512B1D00D29B73 /* Data.swift */,
 			);
 			path = CryptoApp;
 			sourceTree = "<group>";
@@ -126,7 +141,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				008E00F7284E091C0044C19F /* LaunchScreen.storyboard in Resources */,
+				008E0105284E0E750044C19F /* FavouritesWidget.xib in Resources */,
 				008E00F4284E091C0044C19F /* Assets.xcassets in Resources */,
+				0055484A284FA08F00DCEE1E /* CryptoTableViewCell.xib in Resources */,
 				008E00F2284E09170044C19F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,7 +156,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				008E00EF284E09170044C19F /* ViewController.swift in Sources */,
+				007A839528512B1D00D29B73 /* Data.swift in Sources */,
+				008E0104284E0E750044C19F /* FavouritesWidget.swift in Sources */,
 				008E00EB284E09170044C19F /* AppDelegate.swift in Sources */,
+				00554849284FA08F00DCEE1E /* CryptoTableViewCell.swift in Sources */,
 				008E00ED284E09170044C19F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

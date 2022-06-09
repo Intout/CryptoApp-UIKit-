@@ -1,24 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CryptoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eXQ-ut-b5c">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="D0O-GX-Wfi">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="308"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Favourites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4H-Nk-I9D">
+                                            <rect key="frame" x="57" y="0.0" width="166.5" height="47"/>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="36"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k3Q-hn-bct">
+                                            <rect key="frame" x="32" y="67" width="382" height="150"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="150" id="UTO-2q-gjt"/>
+                                            </constraints>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FY7-L5-SKv">
+                                                <size key="itemSize" width="128" height="128"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="7N7-Wb-ZRZ">
+                                                    <rect key="frame" x="0.0" y="11" width="128" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GWh-IT-Ssn">
+                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </collectionViewCellContentView>
+                                                </collectionViewCell>
+                                            </cells>
+                                        </collectionView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cryptos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fk6-9p-p4a">
+                                            <rect key="frame" x="57" y="237" width="128.5" height="51"/>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="36"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="k3Q-hn-bct" firstAttribute="top" secondItem="E4H-Nk-I9D" secondAttribute="bottom" constant="20" id="7uN-Tw-yUw"/>
+                                        <constraint firstItem="fk6-9p-p4a" firstAttribute="top" secondItem="k3Q-hn-bct" secondAttribute="bottom" constant="20" id="Ccm-sT-8r1"/>
+                                        <constraint firstAttribute="bottom" secondItem="fk6-9p-p4a" secondAttribute="bottom" constant="20" id="DgL-zg-2Ns"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="E4H-Nk-I9D" secondAttribute="trailing" constant="20" symbolic="YES" id="JIH-a6-sc3"/>
+                                        <constraint firstItem="E4H-Nk-I9D" firstAttribute="top" secondItem="D0O-GX-Wfi" secondAttribute="top" id="Lca-l1-JwP"/>
+                                        <constraint firstAttribute="trailing" secondItem="k3Q-hn-bct" secondAttribute="trailing" id="Of7-OB-Rq0"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fk6-9p-p4a" secondAttribute="trailing" symbolic="YES" id="c1A-RF-meg"/>
+                                        <constraint firstItem="k3Q-hn-bct" firstAttribute="leading" secondItem="D0O-GX-Wfi" secondAttribute="leading" constant="32" id="fVe-gt-Z6b"/>
+                                        <constraint firstItem="E4H-Nk-I9D" firstAttribute="leading" secondItem="D0O-GX-Wfi" secondAttribute="leading" constant="57" id="gCZ-5L-Cux"/>
+                                        <constraint firstItem="fk6-9p-p4a" firstAttribute="leading" secondItem="D0O-GX-Wfi" secondAttribute="leading" constant="57" id="yKL-JP-npc"/>
+                                    </constraints>
+                                </view>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eXQ-ut-b5c" secondAttribute="trailing" id="IOD-wR-MD1"/>
+                            <constraint firstItem="eXQ-ut-b5c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aPu-p6-vIj"/>
+                            <constraint firstAttribute="bottom" secondItem="eXQ-ut-b5c" secondAttribute="bottom" id="bsT-xm-HyK"/>
+                            <constraint firstItem="eXQ-ut-b5c" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mk8-pl-OnA"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cryptoTableView" destination="eXQ-ut-b5c" id="VTp-26-elB"/>
+                        <outlet property="widgetCollection" destination="k3Q-hn-bct" id="TJs-9R-wQc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="115.84821428571428"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
