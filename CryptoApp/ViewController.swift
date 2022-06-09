@@ -20,14 +20,13 @@ class ViewController: UIViewController {
     }
     
     private var cryptoDatas: CryptoDatas?
-
+    private var favourites: [String] = ["bitcoin", "ethereum", "tether"]
     private func setupUI(){
         
         widgetCollection.delegate = self
         widgetCollection.dataSource = self
         cryptoTableView.delegate = self
         cryptoTableView.dataSource = self
-
         
         widgetCollection.register(.init(nibName: "FavouritesWidget", bundle: nil), forCellWithReuseIdentifier: "FavouritesWidget")
         
@@ -58,6 +57,7 @@ class ViewController: UIViewController {
                     print(decodedData)
                     self.cryptoDatas = decodedData
                     DispatchQueue.main.async {
+                        self.widgetCollection.reloadData()
                         self.cryptoTableView.reloadData()
                     }
                 } catch {
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64
+        return 70
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -96,7 +96,7 @@ extension ViewController: UITableViewDataSource{
         cell.nameLabel.text = cryptoDatas?.data![indexPath.item].name
         cell.updatePercentageSection(percentage: (cryptoDatas?.data![indexPath.item].changePercent24Hr)!)
         
-        
+        cell.backgroundColor = .systemGray6
         return cell
     }
     
@@ -108,7 +108,7 @@ extension ViewController: UICollectionViewDelegate{
 
 extension ViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return favourites.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -119,9 +119,16 @@ extension ViewController: UICollectionViewDataSource{
         cell.layer.shadowOpacity = 0.4
         cell.layer.shadowRadius = 2.0
         cell.layer.masksToBounds = false
+        
+        cell.nameLabel.text = cryptoDatas?.data?.compactMap{
+            $0.id == favourites[indexPath.item] ? $0.name : "-"
+        }.filter{$0 != "-"}.first
+        cell.priceLabel.text = "$" + String(format: "%.0f", ((cryptoDatas?.data?.compactMap{
+            $0.id == favourites[indexPath.item] ? $0.priceUsd as! NSString : "-"
+        }.filter{$0 != "-"}.first) ?? "0.0" as NSString).floatValue)
+        
         return cell
     }
-    
     
 }
 

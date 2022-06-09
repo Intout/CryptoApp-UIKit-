@@ -70,6 +70,7 @@
 		008E00E9284E09170044C19F /* CryptoApp */ = {
 			isa = PBXGroup;
 			children = (
+				007A839428512B1D00D29B73 /* Data.swift */,
 				008E00EA284E09170044C19F /* AppDelegate.swift */,
 				008E00EC284E09170044C19F /* SceneDelegate.swift */,
 				008E00EE284E09170044C19F /* ViewController.swift */,
@@ -77,7 +78,6 @@
 				008E00F3284E091C0044C19F /* Assets.xcassets */,
 				008E00F5284E091C0044C19F /* LaunchScreen.storyboard */,
 				008E00F8284E091C0044C19F /* Info.plist */,
-				007A839428512B1D00D29B73 /* Data.swift */,
 			);
 			path = CryptoApp;
 			sourceTree = "<group>";

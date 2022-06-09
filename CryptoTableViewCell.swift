@@ -30,27 +30,13 @@ class CryptoTableViewCell: UITableViewCell {
     private func setupUI(){
         containerView.layer.cornerRadius = 25
         percentageView.layer.cornerRadius = 25
-        //containerView.backgroundColor = .gray
         
-        let size = containerView.frame.size
-        containerView.clipsToBounds = true
-        let layer: CALayer = CALayer()
-        layer.backgroundColor = UIColor.lightGray.cgColor
-        layer.position = CGPoint(x: size.width / 2, y: -size.height / 2 + 0.5)
-        layer.bounds = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        layer.shadowColor = UIColor.darkGray.cgColor
-        layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
-        layer.shadowOpacity = 0.8
-        layer.shadowRadius = 5.0
-        
-        
-        
-        containerView.layer.addSublayer(layer)
-        
-        
+        percentageLabel.textColor = .white
+        containerView.innerShadow(radius: 5.0, opacity: 0.8, offset: CGSize(width: 0.5, height: 0.5))
+
         var arrowImage = UIImage(systemName: "arrow.forward")
-        arrowImage?.withTintColor(.gray)
         directionImage.image = arrowImage
+        directionImage.tintColor = .systemGray6
         
         
     }
@@ -60,11 +46,11 @@ class CryptoTableViewCell: UITableViewCell {
         var value = percentage
         
         if percentage.contains("-"){
-            percentageView.backgroundColor = .red
+            percentageView.backgroundColor = .systemRed
             value.removeFirst()
             percentageLabel.text = "-%" + String(format: "%.3f", (value as NSString).floatValue)
         } else {
-            percentageView.backgroundColor = .green
+            percentageView.backgroundColor = .systemGreen
             value.removeFirst()
             percentageLabel.text = "%" + String(format: "%.3f", (value as NSString).floatValue)
         }
@@ -80,4 +66,19 @@ class CryptoTableViewCell: UITableViewCell {
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 32, bottom: 10, right: 32))
     }
     
+}
+extension UIView{
+    func innerShadow(radius shadowRaidus: CGFloat, opacity shadowOpacity: Float, offset shadowOffset: CGSize){
+        let size = self.frame.size
+        self.clipsToBounds = true
+        let innerShadowLayer: CALayer = CALayer()
+        innerShadowLayer.backgroundColor = UIColor.lightGray.cgColor
+        innerShadowLayer.position = CGPoint(x: size.width / 2, y: -size.height / 2 + 0.5)
+        innerShadowLayer.bounds = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        innerShadowLayer.shadowColor = UIColor.darkGray.cgColor
+        innerShadowLayer.shadowOffset = shadowOffset
+        innerShadowLayer.shadowOpacity = shadowOpacity
+        innerShadowLayer.shadowRadius = shadowRaidus
+        self.layer.addSublayer(innerShadowLayer)
+    }
 }
