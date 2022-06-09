@@ -41,6 +41,9 @@ class CryptoTableViewCell: UITableViewCell {
         
     }
     
+    /// Update percentage frame according to fetched data. If data contains "-" view color is set to red and "-" char gets poped from string, new string value turns in to
+    /// float then it turns in to "%.3f" format as string. if data doesn't contains "-" view color is set to green and value turns into "%.3f" string format.
+    /// - Parameter percentage: Fetched percentage data. It should be in "-0.0" or "0.0" format.
     func updatePercentageSection(percentage: String){
         
         var value = percentage

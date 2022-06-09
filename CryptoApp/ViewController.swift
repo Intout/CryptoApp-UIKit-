@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     
     private var cryptoDatas: CryptoDatas?
     private var filteredCryptoDatas: [CryptoData] = []
-    private var favourites: [String] = ["bitcoin", "ethereum", "tether"]
+    private var favourites: [String] = ["bitcoin", "ethereum", "tether", "cardano", "decentraland"]
     private func setupUI(){
         
         widgetCollection.delegate = self
@@ -31,16 +31,35 @@ class ViewController: UIViewController {
         cryptoTableView.dataSource = self
         cryptoSearchBar.delegate = self
         
+        // Change text color in UISearchBar
+        let textFieldSearchBar = cryptoSearchBar.value(forKey: "searchField") as? UITextField
+        textFieldSearchBar?.textColor = .black
         
         widgetCollection.register(.init(nibName: "FavouritesWidget", bundle: nil), forCellWithReuseIdentifier: "FavouritesWidget")
+        widgetCollection.clipsToBounds = false
         
         cryptoTableView.register(.init(nibName: "CryptoTableViewCell", bundle: nil), forCellReuseIdentifier: "CryptoTableViewCell")
         
-        widgetCollection.clipsToBounds = false
+        //Refresh control on UITableView
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
+        cryptoTableView.refreshControl = refreshControl
 
         
     }
     
+    @objc
+    /// On action fetchData again then end refreshing.
+    /// - Parameter refreshControl: Refresh Control usually send as self in addTarget function.
+    private func refreshData(refreshControl: UIRefreshControl){
+        fetchData()
+        print("Refreshed!")
+        refreshControl.endRefreshing()
+    }
+    
+    /// Makes URL request for given URL. After data fetch is successfull, UI components get refreshed in main thread.
     private func fetchData(){
         let url = URL(string: "https://api.coincap.io/v2/assets")
         
@@ -56,11 +75,16 @@ class ViewController: UIViewController {
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
                 do{
-                    print(data.base64EncodedString())
+                    //print(data.base64EncodedString())
                     let decodedData = try JSONDecoder().decode(CryptoDatas.self, from: data)
-                    print(decodedData)
+                    //print(decodedData)
                     self.cryptoDatas = decodedData
                     self.filteredCryptoDatas = decodedData.data ?? []
+                    
+                    for data in decodedData.data!{
+                        print(data.symbol)
+                    }
+                    
                     DispatchQueue.main.async {
                         self.widgetCollection.reloadData()
                         self.cryptoTableView.reloadData()
@@ -94,12 +118,19 @@ extension ViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredCryptoDatas.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CryptoTableViewCell", for: indexPath) as! CryptoTableViewCell
         
+        if let imageName = filteredCryptoDatas[indexPath.item].symbol{
+            cell.icon.image = UIImage(named: imageName)
+        } else {
+            
+        }
+        
         cell.nameLabel.text = filteredCryptoDatas[indexPath.item].name
         cell.updatePercentageSection(percentage: (filteredCryptoDatas[indexPath.item].changePercent24Hr)!)
+        
         
         cell.backgroundColor = .systemGray6
         return cell
@@ -124,14 +155,25 @@ extension ViewController: UICollectionViewDataSource{
         cell.layer.shadowOpacity = 0.4
         cell.layer.shadowRadius = 2.0
         cell.layer.masksToBounds = false
-        
+            
+        if let data = cryptoDatas?.data?.filter({$0.id == favourites[indexPath.item]}).first{
+            if let imageName = data.symbol{
+                cell.iconImage.image = UIImage(named: imageName)
+            }
+            cell.nameLabel.text = data.name
+            cell.priceLabel.text = "$" + String(format: "%.0f", (data.priceUsd! as NSString ).floatValue)
+        } else {
+            cell.nameLabel.text = "-"
+            cell.priceLabel.text = "-"
+        }
+        /*
         cell.nameLabel.text = cryptoDatas?.data?.compactMap{
             $0.id == favourites[indexPath.item] ? $0.name : "-"
         }.filter{$0 != "-"}.first
         cell.priceLabel.text = "$" + String(format: "%.0f", ((cryptoDatas?.data?.compactMap{
             $0.id == favourites[indexPath.item] ? $0.priceUsd as! NSString : "-"
         }.filter{$0 != "-"}.first) ?? "0.0" as NSString).floatValue)
-        
+        */
         return cell
     }
     
