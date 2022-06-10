@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0047BB3C285393E600479310 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047BB3B285393E600479310 /* DetailsViewController.swift */; };
+		0047BB3F2853A7D300479310 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047BB3D2853A7D300479310 /* DetailsTableViewCell.swift */; };
+		0047BB402853A7D300479310 /* DetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0047BB3E2853A7D300479310 /* DetailsTableViewCell.xib */; };
 		00554849284FA08F00DCEE1E /* CryptoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00554847284FA08F00DCEE1E /* CryptoTableViewCell.swift */; };
 		0055484A284FA08F00DCEE1E /* CryptoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00554848284FA08F00DCEE1E /* CryptoTableViewCell.xib */; };
 		007A839528512B1D00D29B73 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007A839428512B1D00D29B73 /* Data.swift */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0047BB3B285393E600479310 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		0047BB3D2853A7D300479310 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
+		0047BB3E2853A7D300479310 /* DetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsTableViewCell.xib; sourceTree = "<group>"; };
 		00554847284FA08F00DCEE1E /* CryptoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTableViewCell.swift; sourceTree = "<group>"; };
 		00554848284FA08F00DCEE1E /* CryptoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CryptoTableViewCell.xib; sourceTree = "<group>"; };
 		007A839428512B1D00D29B73 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -73,8 +79,11 @@
 				007A839428512B1D00D29B73 /* Data.swift */,
 				008E00EA284E09170044C19F /* AppDelegate.swift */,
 				008E00EC284E09170044C19F /* SceneDelegate.swift */,
+				0047BB3B285393E600479310 /* DetailsViewController.swift */,
 				008E00EE284E09170044C19F /* ViewController.swift */,
 				008E00F0284E09170044C19F /* Main.storyboard */,
+				0047BB3D2853A7D300479310 /* DetailsTableViewCell.swift */,
+				0047BB3E2853A7D300479310 /* DetailsTableViewCell.xib */,
 				008E00F3284E091C0044C19F /* Assets.xcassets */,
 				008E00F5284E091C0044C19F /* LaunchScreen.storyboard */,
 				008E00F8284E091C0044C19F /* Info.plist */,
@@ -142,6 +151,7 @@
 			files = (
 				008E00F7284E091C0044C19F /* LaunchScreen.storyboard in Resources */,
 				008E0105284E0E750044C19F /* FavouritesWidget.xib in Resources */,
+				0047BB402853A7D300479310 /* DetailsTableViewCell.xib in Resources */,
 				008E00F4284E091C0044C19F /* Assets.xcassets in Resources */,
 				0055484A284FA08F00DCEE1E /* CryptoTableViewCell.xib in Resources */,
 				008E00F2284E09170044C19F /* Main.storyboard in Resources */,
@@ -159,7 +169,9 @@
 				007A839528512B1D00D29B73 /* Data.swift in Sources */,
 				008E0104284E0E750044C19F /* FavouritesWidget.swift in Sources */,
 				008E00EB284E09170044C19F /* AppDelegate.swift in Sources */,
+				0047BB3C285393E600479310 /* DetailsViewController.swift in Sources */,
 				00554849284FA08F00DCEE1E /* CryptoTableViewCell.swift in Sources */,
+				0047BB3F2853A7D300479310 /* DetailsTableViewCell.swift in Sources */,
 				008E00ED284E09170044C19F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

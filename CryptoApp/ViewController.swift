@@ -147,6 +147,13 @@ extension ViewController: UICollectionViewDataSource{
         return favourites.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController{
+            navigationController?.pushViewController(viewController, animated: true)
+            viewController.cryptoData = filteredCryptoDatas[indexPath.item]
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = widgetCollection.dequeueReusableCell(withReuseIdentifier: "FavouritesWidget", for: indexPath) as! FavouritesWidget
         // Change widget data here.
@@ -166,14 +173,6 @@ extension ViewController: UICollectionViewDataSource{
             cell.nameLabel.text = "-"
             cell.priceLabel.text = "-"
         }
-        /*
-        cell.nameLabel.text = cryptoDatas?.data?.compactMap{
-            $0.id == favourites[indexPath.item] ? $0.name : "-"
-        }.filter{$0 != "-"}.first
-        cell.priceLabel.text = "$" + String(format: "%.0f", ((cryptoDatas?.data?.compactMap{
-            $0.id == favourites[indexPath.item] ? $0.priceUsd as! NSString : "-"
-        }.filter{$0 != "-"}.first) ?? "0.0" as NSString).floatValue)
-        */
         return cell
     }
     
