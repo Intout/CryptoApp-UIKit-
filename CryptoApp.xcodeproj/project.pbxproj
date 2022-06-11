@@ -53,13 +53,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		008E00DE284E09170044C19F = {
+		008B124428545EF3000BBBA8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0047BB3B285393E600479310 /* DetailsViewController.swift */,
+				008E00EE284E09170044C19F /* ViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		008B124528545F09000BBBA8 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				008E00EA284E09170044C19F /* AppDelegate.swift */,
+				008E00EC284E09170044C19F /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		008B124628545F27000BBBA8 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				007A839428512B1D00D29B73 /* Data.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		008B124728545F31000BBBA8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				008E00F0284E09170044C19F /* Main.storyboard */,
+				008B124828545F50000BBBA8 /* Components */,
+				008B124428545EF3000BBBA8 /* Views */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		008B124828545F50000BBBA8 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0047BB3D2853A7D300479310 /* DetailsTableViewCell.swift */,
+				0047BB3E2853A7D300479310 /* DetailsTableViewCell.xib */,
 				00554847284FA08F00DCEE1E /* CryptoTableViewCell.swift */,
 				00554848284FA08F00DCEE1E /* CryptoTableViewCell.xib */,
 				008E0102284E0E750044C19F /* FavouritesWidget.swift */,
 				008E0103284E0E750044C19F /* FavouritesWidget.xib */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		008E00DE284E09170044C19F = {
+			isa = PBXGroup;
+			children = (
 				008E00E9284E09170044C19F /* CryptoApp */,
 				008E00E8284E09170044C19F /* Products */,
 			);
@@ -76,14 +121,9 @@
 		008E00E9284E09170044C19F /* CryptoApp */ = {
 			isa = PBXGroup;
 			children = (
-				007A839428512B1D00D29B73 /* Data.swift */,
-				008E00EA284E09170044C19F /* AppDelegate.swift */,
-				008E00EC284E09170044C19F /* SceneDelegate.swift */,
-				0047BB3B285393E600479310 /* DetailsViewController.swift */,
-				008E00EE284E09170044C19F /* ViewController.swift */,
-				008E00F0284E09170044C19F /* Main.storyboard */,
-				0047BB3D2853A7D300479310 /* DetailsTableViewCell.swift */,
-				0047BB3E2853A7D300479310 /* DetailsTableViewCell.xib */,
+				008B124628545F27000BBBA8 /* Data */,
+				008B124728545F31000BBBA8 /* UI */,
+				008B124528545F09000BBBA8 /* Delegates */,
 				008E00F3284E091C0044C19F /* Assets.xcassets */,
 				008E00F5284E091C0044C19F /* LaunchScreen.storyboard */,
 				008E00F8284E091C0044C19F /* Info.plist */,

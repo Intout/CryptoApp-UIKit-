@@ -7,11 +7,17 @@
 
 import UIKit
 
+
+protocol WachtableDelegate: AnyObject{
+    func editWatchList(new id:String)
+}
+
 class DetailsViewController: UIViewController {
 
     var detailsDict: [String:String] = [:]
     var cryptoData: CryptoData?
-    
+    var isInWatchlist: Bool?
+    weak var delegate: WachtableDelegate? = nil
     // Icon view
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var iconView: UIView!
@@ -31,16 +37,27 @@ class DetailsViewController: UIViewController {
         setupUI()
     }
     
+    @IBOutlet weak var watchlistButton: UIButton!
     private func initData(){
         detailsDict["Market Cap"] = "$" + (String(format: "%.0f", (cryptoData?.marketCapUsd as! NSString).floatValue) ?? "-")
         detailsDict["Volume (24hr)"] = "$" + (String(format: "%.0f", (cryptoData?.volumeUsd24Hr as! NSString ).floatValue) ?? "-")
-        detailsDict["Circulization"] = (String(format: "%.0f", (cryptoData?.supply  as! NSString ).floatValue) ?? "-") + " \(String(describing: cryptoData?.symbol))"
+        detailsDict["Circulization"] = (String(format: "%.0f", (cryptoData?.supply  as! NSString ).floatValue) ?? "-") + " \(String(describing: cryptoData?.symbol ?? "-"))"
     }
     private func setupUI(){
         
         if let imageName = cryptoData?.symbol{
             icon.image = UIImage(named: imageName)
         }
+    
+        self.watchlistButton.layer.cornerRadius = 10
+        watchlistButton.layer.shadowColor = UIColor.black.cgColor
+        watchlistButton.layer.shadowOffset = CGSize(width: 0, height: 3)
+        watchlistButton.layer.shadowOpacity = 0.4
+        watchlistButton.layer.shadowRadius = 2.0
+        watchlistButton.layer.masksToBounds = false
+        
+        self.watchlistButton.didPressed(is: isInWatchlist ?? true, pressedColor: .white, nonPressedColor: .systemGray4, pressedText: "Add To Watchlist", nonPressedText: "Remove From Watchlist")
+        
         detailsTableView.register(.init(nibName: "DetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "DetailsTableViewCell")
         
         detailsTableView.delegate = self
@@ -109,6 +126,16 @@ class DetailsViewController: UIViewController {
     }
     */
 
+
+    @IBAction func watchlistButtonPressed(_ sender: Any) {
+        self.isInWatchlist?.toggle()
+        if delegate != nil{
+            if let id = cryptoData?.id{
+                delegate?.editWatchList(new: id)
+            }
+        }
+        self.watchlistButton.didPressed(is: isInWatchlist ?? true, pressedColor: .white, nonPressedColor: .systemGray4, pressedText: "Add To Watchlist", nonPressedText: "Remove From Watchlist")
+    }
 }
 
 extension DetailsViewController: UITableViewDelegate{
@@ -137,4 +164,22 @@ extension DetailsViewController: UITableViewDataSource{
         return cell
     }
     
+}
+
+extension UIButton{
+    func didPressed(is pressed: Bool, pressedColor: UIColor, nonPressedColor: UIColor, pressedText: String, nonPressedText: String){
+
+        
+        if pressed{
+            self.backgroundColor = .systemGray4
+            self.setTitle("Remove From Watchlist", for: .normal)
+            self.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+            self.setTitleColor(.white, for: .normal)        } else {
+            self.backgroundColor = .white
+            self.setTitle("Add To Watchlist", for: .normal)
+            self.setImage(UIImage(systemName: "eye"), for: .normal)
+            self.setTitleColor(.black, for: .normal)
+        }
+        self.reloadInputViews()
+    }
 }

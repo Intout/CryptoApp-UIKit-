@@ -208,15 +208,28 @@
                                             </constraints>
                                         </view>
                                     </tableView>
+                                    <button opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sM-Ps-hVO">
+                                        <rect key="frame" x="50" y="580" width="314" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="jDk-Np-giG"/>
+                                        </constraints>
+                                        <buttonConfiguration key="configuration" style="plain" title="Add To Watchlist" cornerStyle="capsule"/>
+                                        <connections>
+                                            <action selector="watchlistButtonPressed:" destination="dNU-lI-uRC" eventType="touchUpInside" id="lFz-cd-v16"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Qe0-8k-fj8" secondAttribute="trailing" constant="55" id="66v-5f-8rb"/>
                                     <constraint firstItem="Qe0-8k-fj8" firstAttribute="top" secondItem="Avd-2Z-F3K" secondAttribute="bottom" constant="17" id="JOR-ZO-JbR"/>
                                     <constraint firstAttribute="trailing" secondItem="sXt-RI-2v2" secondAttribute="trailing" constant="50" id="JZ9-nS-Ij4"/>
+                                    <constraint firstItem="2sM-Ps-hVO" firstAttribute="top" secondItem="sXt-RI-2v2" secondAttribute="bottom" constant="17" id="N93-As-Lzf"/>
+                                    <constraint firstAttribute="trailing" secondItem="2sM-Ps-hVO" secondAttribute="trailing" constant="50" id="THq-jj-icy"/>
                                     <constraint firstItem="Avd-2Z-F3K" firstAttribute="top" secondItem="5Rh-Us-yiR" secondAttribute="top" constant="65" id="URd-Au-R6M"/>
                                     <constraint firstItem="sXt-RI-2v2" firstAttribute="leading" secondItem="5Rh-Us-yiR" secondAttribute="leading" constant="50" id="XNr-sc-NdO"/>
                                     <constraint firstItem="Avd-2Z-F3K" firstAttribute="centerX" secondItem="5Rh-Us-yiR" secondAttribute="centerX" id="k02-hA-ACJ"/>
+                                    <constraint firstItem="2sM-Ps-hVO" firstAttribute="leading" secondItem="5Rh-Us-yiR" secondAttribute="leading" constant="50" id="mAd-EQ-GYU"/>
                                     <constraint firstItem="Qe0-8k-fj8" firstAttribute="leading" secondItem="5Rh-Us-yiR" secondAttribute="leading" constant="55" id="n59-6A-ud3"/>
                                     <constraint firstItem="sXt-RI-2v2" firstAttribute="top" secondItem="Qe0-8k-fj8" secondAttribute="bottom" constant="17" id="sNT-zp-PcP"/>
                                 </constraints>
@@ -240,6 +253,7 @@
                         <outlet property="priceBackgroundView" destination="FtM-Uh-vDU" id="yYE-Cp-hF2"/>
                         <outlet property="priceLabel" destination="PYp-z2-xQr" id="gxh-fU-HWW"/>
                         <outlet property="titleLabel" destination="Qe0-8k-fj8" id="1gP-UC-uCx"/>
+                        <outlet property="watchlistButton" destination="2sM-Ps-hVO" id="bEP-gr-LtH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DU5-w0-vjv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

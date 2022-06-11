@@ -16,13 +16,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var cryptoSearchBar: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.favourites = defaults.object(forKey: "Favourites") as? [String] ?? []
+    
         fetchData()
        setupUI()
     }
     
     private var cryptoDatas: CryptoDatas?
     private var filteredCryptoDatas: [CryptoData] = []
-    private var favourites: [String] = ["bitcoin", "ethereum", "tether", "cardano", "decentraland"]
+    private var favourites: [String] = []
+    let defaults = UserDefaults.standard
     private func setupUI(){
         
         widgetCollection.delegate = self
@@ -151,6 +154,8 @@ extension ViewController: UICollectionViewDataSource{
         if let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController{
             navigationController?.pushViewController(viewController, animated: true)
             viewController.cryptoData = filteredCryptoDatas[indexPath.item]
+            viewController.isInWatchlist = favourites.contains(filteredCryptoDatas[indexPath.item].id ?? " ")
+            viewController.delegate = self
         }
     }
     
@@ -195,6 +200,20 @@ extension ViewController: UISearchBarDelegate{
         
         DispatchQueue.main.async {
             self.cryptoTableView.reloadData()
+        }
+    }
+}
+
+extension ViewController: WachtableDelegate{
+    func editWatchList(new id: String) {
+        if favourites.contains(id){
+            favourites = favourites.filter{$0 != id}
+        } else {
+            favourites.append(id)
+        }
+        DispatchQueue.main.async {
+            self.defaults.set(self.favourites, forKey: "Favourites")
+            self.widgetCollection.reloadData()
         }
     }
 }
