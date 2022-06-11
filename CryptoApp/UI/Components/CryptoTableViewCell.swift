@@ -61,27 +61,10 @@ class CryptoTableViewCell: UITableViewCell {
         
     }
     
-    
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 32, bottom: 10, right: 32))
     }
     
-}
-extension UIView{
-    func innerShadow(radius shadowRaidus: CGFloat, opacity shadowOpacity: Float, offset shadowOffset: CGSize){
-        let size = self.frame.size
-        self.clipsToBounds = true
-        let innerShadowLayer: CALayer = CALayer()
-        innerShadowLayer.backgroundColor = UIColor.lightGray.cgColor
-        innerShadowLayer.position = CGPoint(x: size.width / 2, y: -size.height / 2 + 0.5)
-        innerShadowLayer.bounds = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        innerShadowLayer.shadowColor = UIColor.darkGray.cgColor
-        innerShadowLayer.shadowOffset = shadowOffset
-        innerShadowLayer.shadowOpacity = shadowOpacity
-        innerShadowLayer.shadowRadius = shadowRaidus
-        self.layer.addSublayer(innerShadowLayer)
-    }
 }

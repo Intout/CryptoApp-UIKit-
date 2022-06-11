@@ -47,3 +47,4 @@ struct CryptoData: Codable {
         case explorer = "explorer"
     }
 }
+
