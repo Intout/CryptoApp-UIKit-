@@ -12,8 +12,9 @@
 		0047BB402853A7D300479310 /* DetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0047BB3E2853A7D300479310 /* DetailsTableViewCell.xib */; };
 		00554849284FA08F00DCEE1E /* CryptoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00554847284FA08F00DCEE1E /* CryptoTableViewCell.swift */; };
 		0055484A284FA08F00DCEE1E /* CryptoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00554848284FA08F00DCEE1E /* CryptoTableViewCell.xib */; };
+		00610B5D2855E0D300DE85A8 /* NavigationControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00610B5C2855E0D300DE85A8 /* NavigationControllerHelper.swift */; };
 		007A839528512B1D00D29B73 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007A839428512B1D00D29B73 /* Data.swift */; };
-		008B124B28549E9C000BBBA8 /* CryptoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B124A28549E9C000BBBA8 /* CryptoDataModel.swift */; };
+		008B124B28549E9C000BBBA8 /* ViewControllerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B124A28549E9C000BBBA8 /* ViewControllerDataModel.swift */; };
 		008B124F28549F35000BBBA8 /* CollectionViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B124E28549F35000BBBA8 /* CollectionViewHelper.swift */; };
 		008B12522854B10C000BBBA8 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B12512854B10C000BBBA8 /* UIView+Extensions.swift */; };
 		008B12542854B2DC000BBBA8 /* TableViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B12532854B2DC000BBBA8 /* TableViewHelper.swift */; };
@@ -25,6 +26,7 @@
 		008E00F7284E091C0044C19F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 008E00F5284E091C0044C19F /* LaunchScreen.storyboard */; };
 		008E0104284E0E750044C19F /* FavouritesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E0102284E0E750044C19F /* FavouritesWidget.swift */; };
 		008E0105284E0E750044C19F /* FavouritesWidget.xib in Resources */ = {isa = PBXBuildFile; fileRef = 008E0103284E0E750044C19F /* FavouritesWidget.xib */; };
+		009834CE2857375100EB5FD0 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009834CD2857375100EB5FD0 /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,8 +35,9 @@
 		0047BB3E2853A7D300479310 /* DetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsTableViewCell.xib; sourceTree = "<group>"; };
 		00554847284FA08F00DCEE1E /* CryptoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTableViewCell.swift; sourceTree = "<group>"; };
 		00554848284FA08F00DCEE1E /* CryptoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CryptoTableViewCell.xib; sourceTree = "<group>"; };
+		00610B5C2855E0D300DE85A8 /* NavigationControllerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerHelper.swift; sourceTree = "<group>"; };
 		007A839428512B1D00D29B73 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		008B124A28549E9C000BBBA8 /* CryptoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDataModel.swift; sourceTree = "<group>"; };
+		008B124A28549E9C000BBBA8 /* ViewControllerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDataModel.swift; sourceTree = "<group>"; };
 		008B124E28549F35000BBBA8 /* CollectionViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHelper.swift; sourceTree = "<group>"; };
 		008B12512854B10C000BBBA8 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		008B12532854B2DC000BBBA8 /* TableViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHelper.swift; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 		008E00F8284E091C0044C19F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		008E0102284E0E750044C19F /* FavouritesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesWidget.swift; sourceTree = "<group>"; };
 		008E0103284E0E750044C19F /* FavouritesWidget.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouritesWidget.xib; sourceTree = "<group>"; };
+		009834CD2857375100EB5FD0 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +65,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00610B5E2855E90300DE85A8 /* DetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				0047BB3B285393E600479310 /* DetailsViewController.swift */,
+			);
+			path = DetailsView;
+			sourceTree = "<group>";
+		};
+		00610B5F2855FF2300DE85A8 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				008B124A28549E9C000BBBA8 /* ViewControllerDataModel.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		008B124428545EF3000BBBA8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				008B124928549E71000BBBA8 /* MainView */,
-				0047BB3B285393E600479310 /* DetailsViewController.swift */,
+				00610B5E2855E90300DE85A8 /* DetailsView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -82,7 +102,6 @@
 		008B124628545F27000BBBA8 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				008B124A28549E9C000BBBA8 /* CryptoDataModel.swift */,
 				007A839428512B1D00D29B73 /* Data.swift */,
 			);
 			path = Data;
@@ -114,8 +133,11 @@
 		008B124928549E71000BBBA8 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				00610B5F2855FF2300DE85A8 /* Entities */,
 				008E00EE284E09170044C19F /* ViewController.swift */,
+				009834CD2857375100EB5FD0 /* MainViewModel.swift */,
 				008B12532854B2DC000BBBA8 /* TableViewHelper.swift */,
+				00610B5C2855E0D300DE85A8 /* NavigationControllerHelper.swift */,
 				008B124E28549F35000BBBA8 /* CollectionViewHelper.swift */,
 			);
 			path = MainView;
@@ -236,12 +258,14 @@
 				008E00EF284E09170044C19F /* ViewController.swift in Sources */,
 				007A839528512B1D00D29B73 /* Data.swift in Sources */,
 				008B124F28549F35000BBBA8 /* CollectionViewHelper.swift in Sources */,
+				00610B5D2855E0D300DE85A8 /* NavigationControllerHelper.swift in Sources */,
 				008E0104284E0E750044C19F /* FavouritesWidget.swift in Sources */,
 				008E00EB284E09170044C19F /* AppDelegate.swift in Sources */,
 				0047BB3C285393E600479310 /* DetailsViewController.swift in Sources */,
+				009834CE2857375100EB5FD0 /* MainViewModel.swift in Sources */,
 				00554849284FA08F00DCEE1E /* CryptoTableViewCell.swift in Sources */,
 				008B12542854B2DC000BBBA8 /* TableViewHelper.swift in Sources */,
-				008B124B28549E9C000BBBA8 /* CryptoDataModel.swift in Sources */,
+				008B124B28549E9C000BBBA8 /* ViewControllerDataModel.swift in Sources */,
 				0047BB3F2853A7D300479310 /* DetailsTableViewCell.swift in Sources */,
 				008E00ED284E09170044C19F /* SceneDelegate.swift in Sources */,
 				008B12522854B10C000BBBA8 /* UIView+Extensions.swift in Sources */,

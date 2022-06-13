@@ -17,6 +17,7 @@ class DetailsViewController: UIViewController {
     var detailsDict: [String:String] = [:]
     var cryptoData: CryptoData?
     var isInWatchlist: Bool?
+    var onWatchlistChanged: (()->())?
     weak var delegate: WachtableDelegate? = nil
     // Icon view
     @IBOutlet weak var icon: UIImageView!
@@ -35,6 +36,8 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         initData()
         setupUI()
+        
+        
     }
     
     @IBOutlet weak var watchlistButton: UIButton!
@@ -134,8 +137,14 @@ class DetailsViewController: UIViewController {
                 delegate?.editWatchList(new: id)
             }
         }
+        
+        // clouser'ı
+        self.onWatchlistChanged?()
+        
         self.watchlistButton.didPressed(is: isInWatchlist ?? true, pressedColor: .white, nonPressedColor: .systemGray4, pressedText: "Add To Watchlist", nonPressedText: "Remove From Watchlist")
     }
+    
+
 }
 
 extension DetailsViewController: UITableViewDelegate{

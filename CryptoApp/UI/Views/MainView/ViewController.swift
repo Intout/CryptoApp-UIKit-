@@ -7,33 +7,40 @@
 
 import UIKit
 
+// In MVVM, viewController in UIkit counts as just View, not a controller!
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var widgetCollection: UICollectionView!
-    
     @IBOutlet weak var cryptoTableView: UITableView!
     @IBOutlet weak var cryptoSearchBar: UISearchBar!
     
     private var dataModel = CryptoDataModel()
     private var collectionViewHelper: CollectionViewHelper!
     private var tableViewHelper: TableViewHelper!
+    private var navigationControllerHelper: NavigationControllerHelper!
     
-    
+    var leClouser: (()->())?
+    private var viewModel = MainViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionViewHelper = CollectionViewHelper(with: widgetCollection, in: self)
-        tableViewHelper = TableViewHelper(with: cryptoTableView, in: self)
-        dataModel.fetchData{ data in
-            
-            self.collectionViewHelper.setData(datas: self.dataModel.getFavouritesDataFromCryptoDatas(data: data))
-            self.tableViewHelper.setData(with: data.data ?? [])
-            
-        }
+        
+        viewModel.delegate = self
+        viewModel.viewDidLoad()
+        
+        
+        navigationControllerHelper = NavigationControllerHelper(for: navigationController!, watchlistClouser:  didWatchlistChanged)
+        collectionViewHelper = CollectionViewHelper(with: widgetCollection, in: viewModel)
+        tableViewHelper = TableViewHelper(with: cryptoTableView, in: viewModel, to: navigationControllerHelper)
+        leClouser = self.didWatchlistChanged
+        
        setupUI()
     }
     
+    private func didWatchlistChanged(){
+       // collectionViewHelper.setData(datas: <#T##[CryptoData]#>)
+    }
     
     let defaults = UserDefaults.standard
     private func setupUI(){
@@ -60,12 +67,7 @@ class ViewController: UIViewController {
     /// On action fetchData again then end refreshing.
     /// - Parameter refreshControl: Refresh Control usually send as self in addTarget function.
     private func refreshData(refreshControl: UIRefreshControl){
-        dataModel.fetchData{ data in
-            
-            self.collectionViewHelper.setData(datas: self.dataModel.getFavouritesDataFromCryptoDatas(data: data))
-            self.tableViewHelper.setData(with: data.data ?? [])
-            
-        }
+        viewModel.refreshData()
         print("Refreshed!")
         refreshControl.endRefreshing()
     }
@@ -83,6 +85,18 @@ extension ViewController: UISearchBarDelegate{
 extension ViewController: WachtableDelegate{
     func editWatchList(new id: String) {
         dataModel.editToFavourites(new: id)
-        collectionViewHelper.setData(datas: dataModel.getFavouritesDataFromCryptoDatas(data: CryptoDatas(data: tableViewHelper.cryptoData, timestamp: nil)))
+      //  collectionViewHelper.setData(datas: dataModel.getFavouritesDataFromCryptoDatas(data: CryptoDatas(data: tableViewHelper.cryptoData, timestamp: nil)))
     }
+}
+
+extension ViewController: MainViewModelDelegate{
+    func didTableViewDataFetched(_ data: [TableViewCellModel]) {
+        tableViewHelper.setData(with: data)
+    }
+    
+    func didCollectionViewDataFetched(_ data: [CollectionViewCellModel]) {
+        collectionViewHelper.setData(datas: data)
+    }
+    
+    
 }

@@ -48,3 +48,24 @@ struct CryptoData: Codable {
     }
 }
 
+struct CollectionViewCellModel{
+    let name: String
+    let price: String
+    let logoName: String?
+}
+
+struct TableViewCellModel{
+    let name: String
+    let logoName: String?
+    let changePercentage: String
+}
+
+struct DetialViewModel{
+    let name: String
+    let logoName: String?
+    let id: String
+    let price: String
+    let circulization: String
+    let marketCap: String
+    let volume: String
+}

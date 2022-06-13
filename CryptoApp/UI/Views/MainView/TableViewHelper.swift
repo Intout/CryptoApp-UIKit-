@@ -10,16 +10,17 @@ import UIKit
 
 class TableViewHelper: NSObject{
     
-    var vc: UIViewController?
-    var tableView: UITableView?
-    // Is this allowed?
-    var cryptoData: [CryptoData] = []
-    var filteredCryptoDatas: [CryptoData] = []
+    weak var viewModel: MainViewModel?
+    weak var tableView: UITableView?
+    weak var navigationControllerHelper: NavigationControllerHelper?
+    var cryptoData: [TableViewCellModel] = []
+    var filteredCryptoDatas: [TableViewCellModel] = []
     
-    init(with tableView: UITableView, in viewController: UIViewController) {
+    init(with tableView: UITableView, in vm: MainViewModel, to navigationControllerHelper: NavigationControllerHelper) {
         super.init()
-        self.vc = viewController
+        self.viewModel = vm
         self.tableView = tableView
+        self.navigationControllerHelper = navigationControllerHelper
         
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
@@ -32,13 +33,14 @@ class TableViewHelper: NSObject{
         self.tableView?.register(.init(nibName: "CryptoTableViewCell", bundle: nil), forCellReuseIdentifier: "CryptoTableViewCell")
     }
     
-    func setData(with data: [CryptoData]){
+    func setData(with data: [TableViewCellModel]){
         self.cryptoData = data
         self.filteredCryptoDatas = data
         DispatchQueue.main.async {
             self.tableView?.reloadData()
         }
     }
+    
     // Is this Allowed?
     func filterData(for searchText: String){
         
@@ -46,7 +48,7 @@ class TableViewHelper: NSObject{
             self.filteredCryptoDatas = self.cryptoData
         } else {
             self.filteredCryptoDatas = cryptoData.filter{
-                $0.name?.lowercased().contains(searchText.lowercased()) ?? false
+                $0.name.lowercased().contains(searchText.lowercased())
             }
         }
         
@@ -78,14 +80,14 @@ extension TableViewHelper: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CryptoTableViewCell", for: indexPath) as! CryptoTableViewCell
         
-        if let imageName = filteredCryptoDatas[indexPath.item].symbol{
+        if let imageName = filteredCryptoDatas[indexPath.item].logoName{
             cell.icon.image = UIImage(named: imageName)
         } else {
             
         }
         
         cell.nameLabel.text = filteredCryptoDatas[indexPath.item].name
-        cell.updatePercentageSection(percentage: (filteredCryptoDatas[indexPath.item].changePercent24Hr)!)
+        cell.updatePercentageSection(percentage: filteredCryptoDatas[indexPath.item].changePercentage)
         
         
         cell.backgroundColor = .systemGray6
@@ -93,6 +95,9 @@ extension TableViewHelper: UITableViewDataSource{
     }
     // Is this allowed?
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+       // navigationControllerHelper?.navigate(with: filteredCryptoDatas[indexPath.item])
+        
         /*
         if let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController{
             vc?.navigationController?.pushViewController(viewController, animated: true)

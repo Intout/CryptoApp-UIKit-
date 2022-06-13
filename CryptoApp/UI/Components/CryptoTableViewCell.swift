@@ -46,18 +46,8 @@ class CryptoTableViewCell: UITableViewCell {
     /// - Parameter percentage: Fetched percentage data. It should be in "-0.0" or "0.0" format.
     func updatePercentageSection(percentage: String){
         
-        var value = percentage
-        
-        if percentage.contains("-"){
-            percentageView.backgroundColor = .systemRed
-            value.removeFirst()
-            percentageLabel.text = "-%" + String(format: "%.3f", (value as NSString).floatValue)
-        } else {
-            percentageView.backgroundColor = .systemGreen
-            value.removeFirst()
-            percentageLabel.text = "%" + String(format: "%.3f", (value as NSString).floatValue)
-        }
-        
+        percentageView.backgroundColor = percentage.contains("-") ? .systemRed : .systemGreen
+        percentageLabel.text = percentage
         
     }
     

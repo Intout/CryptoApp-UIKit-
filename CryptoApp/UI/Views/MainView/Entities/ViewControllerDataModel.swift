@@ -12,7 +12,7 @@ class CryptoDataModel{
     
     private let url = URL(string: "https://api.coincap.io/v2/assets")
     private let defaults = UserDefaults.standard
-    
+    private var rawData: CryptoDatas?
     func fetchData(complationHandler: @escaping (CryptoDatas) -> (Void)){
         
         let urlRequest = URLRequest(url: url!)
@@ -28,7 +28,7 @@ class CryptoDataModel{
                 response.statusCode == 200 {
                 do{
                     let decodedData = try JSONDecoder().decode(CryptoDatas.self, from: data)
-                    
+                    self.rawData = decodedData
                     complationHandler(decodedData)
                     return
                     
@@ -43,6 +43,14 @@ class CryptoDataModel{
             }
             
         }.resume()
+    }
+    
+    func getData() -> [CryptoData]{
+        return rawData?.data ?? []
+    }
+    
+    func getDataAt(for index: Int) -> CryptoData?{
+        return rawData?.data?[index]
     }
     
     func saveFavourites(new favourites: [String]){

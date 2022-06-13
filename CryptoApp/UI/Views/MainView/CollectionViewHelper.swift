@@ -11,14 +11,14 @@ import UIKit
 
 class CollectionViewHelper: NSObject{
     
-    private var vc: UIViewController?
-    private var collectionView: UICollectionView?
-    var favourites: [CryptoData] = []
+    weak private var mainViewModel: MainViewModel?
+    weak private var collectionView: UICollectionView?
+    var favourites: [CollectionViewCellModel] = []
     let defaults = UserDefaults.standard
     
-    init(with collectionView: UICollectionView, in vc: UIViewController) {
+    init(with collectionView: UICollectionView, in vm: MainViewModel) {
         super.init()
-        self.vc = vc
+        self.mainViewModel = vm
         self.collectionView = collectionView
         
         self.collectionView?.delegate = self
@@ -31,7 +31,7 @@ class CollectionViewHelper: NSObject{
         self.collectionView?.register(.init(nibName: "FavouritesWidget", bundle: nil), forCellWithReuseIdentifier: "FavouritesWidget")
     }
     
-    func setData(datas: [CryptoData]){
+    func setData(datas: [CollectionViewCellModel]){
         favourites = datas
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
@@ -59,12 +59,13 @@ extension CollectionViewHelper: UICollectionViewDataSource{
         
         cell.dropShadow(radius: 2.0, opacity: 0.4, offset: CGSize(width: 0, height: 3))
 
-        if let imageName = favourites[indexPath.item].symbol{
+        if let imageName = favourites[indexPath.item].logoName{
             cell.iconImage.image = UIImage(named: imageName)
         }
         
         cell.nameLabel.text = favourites[indexPath.item].name
-        cell.priceLabel.text = "$" + String(format: "%.0f", (favourites[indexPath.item].priceUsd! as NSString ).floatValue)
+        cell.priceLabel.text = favourites[indexPath.item].price
+        
         return cell
     }
 }
