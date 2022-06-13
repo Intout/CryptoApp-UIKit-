@@ -16,6 +16,8 @@ class TableViewHelper: NSObject{
     var cryptoData: [TableViewCellModel] = []
     var filteredCryptoDatas: [TableViewCellModel] = []
     
+    weak var navigationRequestDelegate: NavigationRequestDelegate?
+    
     init(with tableView: UITableView, in vm: MainViewModel, to navigationControllerHelper: NavigationControllerHelper) {
         super.init()
         self.viewModel = vm
@@ -93,18 +95,10 @@ extension TableViewHelper: UITableViewDataSource{
         cell.backgroundColor = .systemGray6
         return cell
     }
-    // Is this allowed?
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-       // navigationControllerHelper?.navigate(with: filteredCryptoDatas[indexPath.item])
+        self.navigationRequestDelegate?.didRequestNavigation(with: indexPath.item)
         
-        /*
-        if let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController{
-            vc?.navigationController?.pushViewController(viewController, animated: true)
-            viewController.cryptoData = filteredCryptoDatas[indexPath.item]
-            viewController.isInWatchlist = favourites.contains(filteredCryptoDatas[indexPath.item].id ?? " ")
-            viewController.delegate = self
-        }
-         */
     }
 }

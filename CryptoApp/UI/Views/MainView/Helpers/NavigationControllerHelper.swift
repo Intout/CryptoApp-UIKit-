@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class NavigationControllerHelper{
     
     weak var navigationController: UINavigationController!
@@ -17,12 +16,12 @@ class NavigationControllerHelper{
         self.watchlistClouser = watchlistClouser
     }
     
-    func navigate(with data: CryptoData){
+    func navigate(with data: DetialViewDataModel) {
         if let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController{
             navigationController.pushViewController(viewController, animated: true)
-            viewController.cryptoData = data
-           // viewController.isInWatchlist = favourites.contains(filteredCryptoDatas[indexPath.item].id ?? " ")
-          //  viewController.delegate = self
+            viewController.viewModel = DetailsViewModel(with: data)
+            // viewController.isInWatchlist = favourites.contains(filteredCryptoDatas[indexPath.item].id ?? " ")
+            //  viewController.delegate = self
             viewController.onWatchlistChanged = self.watchlistClouser
         }
     }

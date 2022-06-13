@@ -60,7 +60,7 @@ struct TableViewCellModel{
     let changePercentage: String
 }
 
-struct DetialViewModel{
+struct DetialViewDataModel{
     let name: String
     let logoName: String?
     let id: String
@@ -68,4 +68,19 @@ struct DetialViewModel{
     let circulization: String
     let marketCap: String
     let volume: String
+    let changePercentage: String
+}
+
+struct DetailsTableViewDataModel{
+    let marketCap: String
+    let circulization: String
+    let volume: String
+}
+
+struct DetailViewHeaderDataModel{
+    let name: String
+    let logoName: String?
+    let id: String
+    let price: String
+    let changepercentage:String
 }

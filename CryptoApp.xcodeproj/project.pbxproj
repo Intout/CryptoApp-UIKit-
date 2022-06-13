@@ -27,6 +27,9 @@
 		008E0104284E0E750044C19F /* FavouritesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E0102284E0E750044C19F /* FavouritesWidget.swift */; };
 		008E0105284E0E750044C19F /* FavouritesWidget.xib in Resources */ = {isa = PBXBuildFile; fileRef = 008E0103284E0E750044C19F /* FavouritesWidget.xib */; };
 		009834CE2857375100EB5FD0 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009834CD2857375100EB5FD0 /* MainViewModel.swift */; };
+		009834D0285774FF00EB5FD0 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009834CF285774FF00EB5FD0 /* DetailsViewModel.swift */; };
+		009834D32857764D00EB5FD0 /* DetailsViewControllerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009834D22857764D00EB5FD0 /* DetailsViewControllerDataModel.swift */; };
+		009834D5285779D900EB5FD0 /* DetailsTableViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009834D4285779D900EB5FD0 /* DetailsTableViewHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,9 @@
 		008E0102284E0E750044C19F /* FavouritesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesWidget.swift; sourceTree = "<group>"; };
 		008E0103284E0E750044C19F /* FavouritesWidget.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouritesWidget.xib; sourceTree = "<group>"; };
 		009834CD2857375100EB5FD0 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		009834CF285774FF00EB5FD0 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		009834D22857764D00EB5FD0 /* DetailsViewControllerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewControllerDataModel.swift; sourceTree = "<group>"; };
+		009834D4285779D900EB5FD0 /* DetailsTableViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +74,10 @@
 		00610B5E2855E90300DE85A8 /* DetailsView */ = {
 			isa = PBXGroup;
 			children = (
+				009834D12857762700EB5FD0 /* Entities */,
 				0047BB3B285393E600479310 /* DetailsViewController.swift */,
+				009834D4285779D900EB5FD0 /* DetailsTableViewHelper.swift */,
+				009834CF285774FF00EB5FD0 /* DetailsViewModel.swift */,
 			);
 			path = DetailsView;
 			sourceTree = "<group>";
@@ -133,12 +142,10 @@
 		008B124928549E71000BBBA8 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				009834D628577BC200EB5FD0 /* Helpers */,
 				00610B5F2855FF2300DE85A8 /* Entities */,
-				008E00EE284E09170044C19F /* ViewController.swift */,
 				009834CD2857375100EB5FD0 /* MainViewModel.swift */,
-				008B12532854B2DC000BBBA8 /* TableViewHelper.swift */,
-				00610B5C2855E0D300DE85A8 /* NavigationControllerHelper.swift */,
-				008B124E28549F35000BBBA8 /* CollectionViewHelper.swift */,
+				008E00EE284E09170044C19F /* ViewController.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -179,6 +186,24 @@
 				008E00F8284E091C0044C19F /* Info.plist */,
 			);
 			path = CryptoApp;
+			sourceTree = "<group>";
+		};
+		009834D12857762700EB5FD0 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				009834D22857764D00EB5FD0 /* DetailsViewControllerDataModel.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		009834D628577BC200EB5FD0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				008B12532854B2DC000BBBA8 /* TableViewHelper.swift */,
+				00610B5C2855E0D300DE85A8 /* NavigationControllerHelper.swift */,
+				008B124E28549F35000BBBA8 /* CollectionViewHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +282,7 @@
 			files = (
 				008E00EF284E09170044C19F /* ViewController.swift in Sources */,
 				007A839528512B1D00D29B73 /* Data.swift in Sources */,
+				009834D0285774FF00EB5FD0 /* DetailsViewModel.swift in Sources */,
 				008B124F28549F35000BBBA8 /* CollectionViewHelper.swift in Sources */,
 				00610B5D2855E0D300DE85A8 /* NavigationControllerHelper.swift in Sources */,
 				008E0104284E0E750044C19F /* FavouritesWidget.swift in Sources */,
@@ -264,11 +290,13 @@
 				0047BB3C285393E600479310 /* DetailsViewController.swift in Sources */,
 				009834CE2857375100EB5FD0 /* MainViewModel.swift in Sources */,
 				00554849284FA08F00DCEE1E /* CryptoTableViewCell.swift in Sources */,
+				009834D5285779D900EB5FD0 /* DetailsTableViewHelper.swift in Sources */,
 				008B12542854B2DC000BBBA8 /* TableViewHelper.swift in Sources */,
 				008B124B28549E9C000BBBA8 /* ViewControllerDataModel.swift in Sources */,
 				0047BB3F2853A7D300479310 /* DetailsTableViewCell.swift in Sources */,
 				008E00ED284E09170044C19F /* SceneDelegate.swift in Sources */,
 				008B12522854B10C000BBBA8 /* UIView+Extensions.swift in Sources */,
+				009834D32857764D00EB5FD0 /* DetailsViewControllerDataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

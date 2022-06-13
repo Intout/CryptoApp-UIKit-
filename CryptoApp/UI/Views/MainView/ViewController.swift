@@ -15,34 +15,36 @@ class ViewController: UIViewController {
     @IBOutlet weak var cryptoTableView: UITableView!
     @IBOutlet weak var cryptoSearchBar: UISearchBar!
     
-    private var dataModel = CryptoDataModel()
+    // Helpers
     private var collectionViewHelper: CollectionViewHelper!
     private var tableViewHelper: TableViewHelper!
     private var navigationControllerHelper: NavigationControllerHelper!
     
-    var leClouser: (()->())?
+    // View Model
     private var viewModel = MainViewModel()
+    
+    var leClouser: (()->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationControllerHelper = NavigationControllerHelper(for: navigationController!, watchlistClouser:  didWatchlistChanged)
+        collectionViewHelper = CollectionViewHelper(with: widgetCollection, in: viewModel)
+        tableViewHelper = TableViewHelper(with: cryptoTableView, in: viewModel, to: navigationControllerHelper)
+        
+        tableViewHelper.navigationRequestDelegate = self
         
         viewModel.delegate = self
         viewModel.viewDidLoad()
         
-        
-        navigationControllerHelper = NavigationControllerHelper(for: navigationController!, watchlistClouser:  didWatchlistChanged)
-        collectionViewHelper = CollectionViewHelper(with: widgetCollection, in: viewModel)
-        tableViewHelper = TableViewHelper(with: cryptoTableView, in: viewModel, to: navigationControllerHelper)
         leClouser = self.didWatchlistChanged
         
-       setupUI()
+        setupUI()
     }
     
     private func didWatchlistChanged(){
        // collectionViewHelper.setData(datas: <#T##[CryptoData]#>)
     }
     
-    let defaults = UserDefaults.standard
     private func setupUI(){
         
 
@@ -54,7 +56,6 @@ class ViewController: UIViewController {
         
         
         //Refresh control on UITableView
-        
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
@@ -84,7 +85,7 @@ extension ViewController: UISearchBarDelegate{
 
 extension ViewController: WachtableDelegate{
     func editWatchList(new id: String) {
-        dataModel.editToFavourites(new: id)
+      //  dataModel.editToFavourites(new: id)
       //  collectionViewHelper.setData(datas: dataModel.getFavouritesDataFromCryptoDatas(data: CryptoDatas(data: tableViewHelper.cryptoData, timestamp: nil)))
     }
 }
@@ -99,4 +100,20 @@ extension ViewController: MainViewModelDelegate{
     }
     
     
+}
+
+
+extension ViewController: NavigationRequestDelegate{
+    func didRequestNavigation(with index: Int) {
+        var indexData = viewModel.fetchDetailsData(for: index)
+        
+        navigationControllerHelper.navigate(with: .init(name: indexData?.name ?? "-",
+                                                        logoName: indexData?.symbol,
+                                                        id: indexData?.id ?? " ",
+                                                        price: indexData?.priceUsd ?? "0",
+                                                        circulization: indexData?.supply ?? "0",
+                                                        marketCap: indexData?.marketCapUsd ?? "0",
+                                                        volume: indexData?.volumeUsd24Hr ?? "0.0",
+                                                        changePercentage: indexData?.changePercent24Hr ?? "0.0"))
+    }
 }

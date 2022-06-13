@@ -8,11 +8,12 @@
 import Foundation
 
 
-class CryptoDataModel{
+class ViewControllerDataModel{
     
     private let url = URL(string: "https://api.coincap.io/v2/assets")
     private let defaults = UserDefaults.standard
-    private var rawData: CryptoDatas?
+    private var rawData: [CryptoData]?
+    private var filteredRawModel: [CryptoData]?
     func fetchData(complationHandler: @escaping (CryptoDatas) -> (Void)){
         
         let urlRequest = URLRequest(url: url!)
@@ -28,29 +29,27 @@ class CryptoDataModel{
                 response.statusCode == 200 {
                 do{
                     let decodedData = try JSONDecoder().decode(CryptoDatas.self, from: data)
-                    self.rawData = decodedData
+                    self.rawData = decodedData.data
+                    self.filteredRawModel = decodedData.data
                     complationHandler(decodedData)
                     return
-                    
-                    for data in decodedData.data!{
-                        print(data.symbol)
-                    }
                 } catch {
                     print("Parsing failed!")
                 }
             } else {
-                print(response)
+                print(response as Any)
             }
             
         }.resume()
     }
-    
+    /*
     func getData() -> [CryptoData]{
-        return rawData?.data ?? []
+        return filteredRawModel ?? []
     }
+    */
     
     func getDataAt(for index: Int) -> CryptoData?{
-        return rawData?.data?[index]
+        return filteredRawModel?[index]
     }
     
     func saveFavourites(new favourites: [String]){
@@ -76,7 +75,7 @@ class CryptoDataModel{
 
     
     func getFavouritesDataFromCryptoDatas(data: CryptoDatas) -> [CryptoData]{
-        var favourites = self.loadFavourites()
+        let favourites = self.loadFavourites()
         return data.data?.filter{
             favourites.contains($0.id ?? "")
         } ?? []

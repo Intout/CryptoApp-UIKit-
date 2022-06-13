@@ -34,7 +34,7 @@ class CryptoTableViewCell: UITableViewCell {
         percentageLabel.textColor = .white
         containerView.innerShadow(radius: 5.0, opacity: 0.8, offset: CGSize(width: 0.5, height: 0.5))
 
-        var arrowImage = UIImage(systemName: "arrow.forward")
+        let arrowImage = UIImage(systemName: "arrow.forward")
         directionImage.image = arrowImage
         directionImage.tintColor = .systemGray6
         
