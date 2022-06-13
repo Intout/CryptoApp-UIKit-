@@ -53,6 +53,7 @@ class ViewControllerDataModel{
     }
     
     func saveFavourites(new favourites: [String]){
+        print("Saved \(favourites)")
         self.defaults.set(favourites, forKey: "Favourites")
     }
     

@@ -14,16 +14,12 @@ import Foundation
 protocol MainViewModelDelegate: AnyObject{
     func didTableViewDataFetched(_ data: [TableViewCellModel])
     func didCollectionViewDataFetched(_ data: [CollectionViewCellModel])
-    
 }
 
 protocol NavigationRequestDelegate: AnyObject{
     func didRequestNavigation(with index: Int)
 }
 
-protocol NavigationDelegate: AnyObject{
-    func didNavigate(with data: DetialViewDataModel)
-}
 
 
 class MainViewModel{
@@ -49,8 +45,32 @@ class MainViewModel{
         return mainViewDataModel.getDataAt(for: index)
     }
     
+    func isInFavourites(for id: String) -> Bool{
+        return loadFavourites().contains(id)
+    }
+    
+    private func saveFavourites(for newArray: [String]){
+        mainViewDataModel.saveFavourites(new: newArray)
+    }
+    
     private func loadFavourites() -> [String]{
         return mainViewDataModel.loadFavourites()
+    }
+    
+    func editFavourites(for id: String){
+        var favourites = loadFavourites()
+        
+        if favourites.contains(id){
+            saveFavourites(for: favourites.filter{
+                $0 != id
+            })
+        } else {
+            favourites.append(id)
+            saveFavourites(for: favourites)
+        }
+        
+        fetchData()
+        
     }
     
     private func fetchData(){

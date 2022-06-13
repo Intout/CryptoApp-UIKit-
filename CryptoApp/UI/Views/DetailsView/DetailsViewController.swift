@@ -14,10 +14,8 @@ protocol WachtableDelegate: AnyObject{
 
 class DetailsViewController: UIViewController {
 
-    var detailsDict: [String:String] = [:]
-    var cryptoData: CryptoData?
     var isInWatchlist: Bool?
-    var onWatchlistChanged: (()->())?
+    var onWatchlistChanged: ((String)->())?
     weak var delegate: WachtableDelegate? = nil
     // Icon view
     @IBOutlet weak var icon: UIImageView!
@@ -82,14 +80,7 @@ class DetailsViewController: UIViewController {
     
     @IBAction func watchlistButtonPressed(_ sender: Any) {
         self.isInWatchlist?.toggle()
-        if delegate != nil{
-            if let id = cryptoData?.id{
-                delegate?.editWatchList(new: id)
-            }
-        }
-        
-        // clouser'ı
-        self.onWatchlistChanged?()
+        self.onWatchlistChanged?(viewModel.getID())
         
         self.watchlistButton.didPressed(is: isInWatchlist ?? true, pressedColor: .white, nonPressedColor: .systemGray4, pressedText: "Add To Watchlist", nonPressedText: "Remove From Watchlist")
     }

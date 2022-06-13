@@ -10,17 +10,17 @@ import UIKit
 class NavigationControllerHelper{
     
     weak var navigationController: UINavigationController!
-    var watchlistClouser: (() -> ())?
-    init(for navigationController: UINavigationController, watchlistClouser: @escaping (()->())){
+    var watchlistClouser: ((String) -> ())?
+    init(for navigationController: UINavigationController, watchlistClouser: @escaping ((String)->())){
         self.navigationController = navigationController
         self.watchlistClouser = watchlistClouser
     }
     
-    func navigate(with data: DetialViewDataModel) {
+    func navigate(with data: DetialViewDataModel, isInWatchlist: Bool) {
         if let viewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController{
             navigationController.pushViewController(viewController, animated: true)
             viewController.viewModel = DetailsViewModel(with: data)
-            // viewController.isInWatchlist = favourites.contains(filteredCryptoDatas[indexPath.item].id ?? " ")
+            viewController.isInWatchlist = isInWatchlist
             //  viewController.delegate = self
             viewController.onWatchlistChanged = self.watchlistClouser
         }

@@ -23,7 +23,6 @@ class ViewController: UIViewController {
     // View Model
     private var viewModel = MainViewModel()
     
-    var leClouser: (()->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +35,12 @@ class ViewController: UIViewController {
         viewModel.delegate = self
         viewModel.viewDidLoad()
         
-        leClouser = self.didWatchlistChanged
-        
         setupUI()
     }
     
-    private func didWatchlistChanged(){
-       // collectionViewHelper.setData(datas: <#T##[CryptoData]#>)
+    private func didWatchlistChanged(with id: String){
+        viewModel.editFavourites(for: id)
+        collectionViewHelper
     }
     
     private func setupUI(){
@@ -114,6 +112,6 @@ extension ViewController: NavigationRequestDelegate{
                                                         circulization: indexData?.supply ?? "0",
                                                         marketCap: indexData?.marketCapUsd ?? "0",
                                                         volume: indexData?.volumeUsd24Hr ?? "0.0",
-                                                        changePercentage: indexData?.changePercent24Hr ?? "0.0"))
+                                                        changePercentage: indexData?.changePercent24Hr ?? "0.0"), isInWatchlist: viewModel.isInFavourites(for: indexData?.id ?? ""))
     }
 }

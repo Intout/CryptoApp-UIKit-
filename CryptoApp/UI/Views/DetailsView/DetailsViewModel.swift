@@ -23,6 +23,10 @@ class DetailsViewModel{
         detailsViewDataModel = data
     }
     
+    func getID() -> String{
+        return detailsViewDataModel?.id ?? ""
+    }
+    
     func viewDidLoad(){
         self.delegate?.didDetailsHeaderFetched(.init(name: self.detailsViewDataModel?.name ?? "-",
                                                      logoName: self.detailsViewDataModel?.logoName,
