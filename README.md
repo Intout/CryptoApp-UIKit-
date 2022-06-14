@@ -2,7 +2,7 @@
 ## Abstract 
   
 In this application, crypto currency information is fetched from  
-[CoinCap.io API](https://api.coincap.io) and displayed on UI that made with MVVM pattern.  
+[CoinCap.io API](https://docs.coincap.io) and displayed on UI that made with MVVM pattern.  
   
 Crypto information is displayed on 2 pages:  
   
