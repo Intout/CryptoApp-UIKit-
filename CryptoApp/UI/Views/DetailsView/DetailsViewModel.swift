@@ -47,7 +47,9 @@ class DetailsViewModel{
 private extension DetailsViewModel{
     
     func formatPrice(for price: String) -> String{
-        return String(format: "%.0f", (price as NSString).floatValue)
+        let priceValue: Float = (price as NSString).floatValue
+        let format = priceValue < 1 ? "%.4f" : "%.1f"
+        return String(format: format, priceValue)
     }
     
     private func formatPercentage(for percentage: String) -> String{

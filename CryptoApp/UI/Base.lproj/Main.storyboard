@@ -123,10 +123,10 @@
                                         <rect key="frame" x="122" y="65" width="170" height="170"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ETH" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4N6-YT-wqR">
-                                                <rect key="frame" x="10" y="10" width="150" height="150"/>
+                                                <rect key="frame" x="20" y="20" width="130" height="130"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="8UK-dF-Kby"/>
-                                                    <constraint firstAttribute="height" constant="150" id="nY4-1Q-Eoy"/>
+                                                    <constraint firstAttribute="width" constant="130" id="8UK-dF-Kby"/>
+                                                    <constraint firstAttribute="height" constant="130" id="nY4-1Q-Eoy"/>
                                                 </constraints>
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                                             </imageView>
@@ -134,11 +134,11 @@
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="170" id="U5s-6A-Dhl"/>
-                                            <constraint firstItem="4N6-YT-wqR" firstAttribute="leading" secondItem="Avd-2Z-F3K" secondAttribute="leading" constant="10" id="bSV-aj-BeX"/>
-                                            <constraint firstAttribute="bottom" secondItem="4N6-YT-wqR" secondAttribute="bottom" constant="10" id="e0x-c7-FGw"/>
-                                            <constraint firstItem="4N6-YT-wqR" firstAttribute="top" secondItem="Avd-2Z-F3K" secondAttribute="top" constant="10" id="exS-19-scG"/>
+                                            <constraint firstItem="4N6-YT-wqR" firstAttribute="leading" secondItem="Avd-2Z-F3K" secondAttribute="leading" constant="20" id="bSV-aj-BeX"/>
+                                            <constraint firstAttribute="bottom" secondItem="4N6-YT-wqR" secondAttribute="bottom" constant="20" id="e0x-c7-FGw"/>
+                                            <constraint firstItem="4N6-YT-wqR" firstAttribute="top" secondItem="Avd-2Z-F3K" secondAttribute="top" constant="20" id="exS-19-scG"/>
                                             <constraint firstAttribute="height" constant="170" id="lsg-Ch-tmg"/>
-                                            <constraint firstAttribute="trailing" secondItem="4N6-YT-wqR" secondAttribute="trailing" constant="10" id="zkL-Bu-lJv"/>
+                                            <constraint firstAttribute="trailing" secondItem="4N6-YT-wqR" secondAttribute="trailing" constant="20" id="zkL-Bu-lJv"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Etherium" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qe0-8k-fj8">

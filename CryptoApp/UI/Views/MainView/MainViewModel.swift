@@ -27,12 +27,6 @@ class MainViewModel{
     private var mainViewDataModel = ViewControllerDataModel()
     weak var delegate: MainViewModelDelegate?
     
-    
-    
-    init(){
-        
-    }
-    
     func viewDidLoad(){
         fetchData()
     }
@@ -48,18 +42,9 @@ class MainViewModel{
     func isInFavourites(for id: String) -> Bool{
         return loadFavourites().contains(id)
     }
-    
-    private func saveFavourites(for newArray: [String]){
-        mainViewDataModel.saveFavourites(new: newArray)
-    }
-    
-    private func loadFavourites() -> [String]{
-        return mainViewDataModel.loadFavourites()
-    }
-    
+
     func editFavourites(for id: String){
         var favourites = loadFavourites()
-        
         if favourites.contains(id){
             saveFavourites(for: favourites.filter{
                 $0 != id
@@ -68,48 +53,37 @@ class MainViewModel{
             favourites.append(id)
             saveFavourites(for: favourites)
         }
-        
-        fetchData()
-        
+        self.delegate?.didCollectionViewDataFetched(self.cryptoDataToCollectionViewData(for: mainViewDataModel.getRawData() ?? []))
     }
     
     private func fetchData(){
-        mainViewDataModel.fetchData{ data in
-            
+        mainViewDataModel.fetchData{
             // Table View Data
-            let tableViewData: [TableViewCellModel] = (data.data ?? []).map{
-                // Type Transfer
-                TableViewCellModel.init(name: $0.name ?? "-",
-                                        logoName: $0.symbol,
-                                        changePercentage: self.formatPercentage(for: $0.changePercent24Hr ?? "0.0")
-                )
-            }
-            self.delegate?.didTableViewDataFetched(tableViewData)
+            self.delegate?.didTableViewDataFetched(self.cryptoDataToTableViewData(for: self.mainViewDataModel.getFilteredData() ?? []))
             
             // Collection View Data
-            let favourites = self.loadFavourites()
-            var collectionViewData: [CollectionViewCellModel] = []
-            // Type Transfer if it's in favourites.
-            for data in data.data ?? []{
-                if favourites.contains(data.id ?? ""){
-                    collectionViewData.append(CollectionViewCellModel.init(name: data.name ?? "-",
-                                                     price: self.formatPrice(for: data.priceUsd ?? "0"),
-                                                     logoName: data.symbol
-                        ))
-                }
-            }
-            self.delegate?.didCollectionViewDataFetched(collectionViewData)
+            self.delegate?.didCollectionViewDataFetched(self.cryptoDataToCollectionViewData(for: self.mainViewDataModel.getRawData() ?? []))
         }
+        
+    }
+}
+// Search
+extension MainViewModel{
+    func search(for text: String){
+        mainViewDataModel.filterData(for: text)
+        self.delegate?.didTableViewDataFetched(self.cryptoDataToTableViewData(for: mainViewDataModel.getFilteredData() ?? []))
     }
 }
 
 // Data Formating
 private extension MainViewModel{
-    private func formatPrice(for price: String) -> String{
-        return "$" +  String(format: "%.0f", (price as NSString).floatValue)
+    func formatPrice(for price: String) -> String{
+        let priceValue: Float = (price as NSString).floatValue
+        let format = priceValue < 1 ? "%.4f" : "%.1f"
+        return "$" +  String(format: format, priceValue)
     }
     
-    private func formatPercentage(for percentage: String) -> String{
+    func formatPercentage(for percentage: String) -> String{
         var percentageHolder = percentage
         if percentageHolder.contains("-"){
             percentageHolder.removeFirst()
@@ -117,4 +91,43 @@ private extension MainViewModel{
         }
         return "%" +  String(format: "%.3f", (percentageHolder as NSString).floatValue)
     }
+}
+// User Defaults.
+private extension MainViewModel{
+    func saveFavourites(for newArray: [String]){
+        mainViewDataModel.saveFavourites(new: newArray)
+    }
+    
+    func loadFavourites() -> [String]{
+        return mainViewDataModel.loadFavourites()
+    }
+}
+
+private extension MainViewModel{
+    
+    func cryptoDataToTableViewData(for cryptoDatas: [CryptoData]) -> [TableViewCellModel]{
+        return (cryptoDatas).map{
+            TableViewCellModel.init(name: $0.name ?? "-",
+                                    logoName: $0.symbol,
+                                    changePercentage: self.formatPercentage(for: $0.changePercent24Hr ?? "0.0")
+            )
+        }
+    }
+    
+    func cryptoDataToCollectionViewData(for cryptoDatas: [CryptoData]) -> [CollectionViewCellModel]{
+        let favourites = self.loadFavourites()
+        var collectionViewData: [CollectionViewCellModel] = []
+        // Type Transfer if it's in favourites.
+        for data in cryptoDatas{
+            if favourites.contains(data.id ?? ""){
+                collectionViewData.append(CollectionViewCellModel.init(
+                    name: data.name ?? "-",
+                    price: self.formatPrice(for: data.priceUsd ?? "0"),
+                    logoName: data.symbol
+                ))
+            }
+        }
+        return collectionViewData
+    }
+    
 }

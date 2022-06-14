@@ -23,6 +23,9 @@ class ViewController: UIViewController {
     // View Model
     private var viewModel = MainViewModel()
     
+    //Search Clouser
+    private var didSearched: ((String)->())?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,21 +34,23 @@ class ViewController: UIViewController {
         tableViewHelper = TableViewHelper(with: cryptoTableView, in: viewModel, to: navigationControllerHelper)
         
         tableViewHelper.navigationRequestDelegate = self
-        
         viewModel.delegate = self
+        
+        self.didSearched = viewModel.search
         viewModel.viewDidLoad()
         
         setupUI()
     }
     
+    
+    
+    
     private func didWatchlistChanged(with id: String){
         viewModel.editFavourites(for: id)
-        collectionViewHelper
     }
     
     private func setupUI(){
-        
-
+    
         cryptoSearchBar.delegate = self
         
         // Change text color in UISearchBar
@@ -75,16 +80,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        tableViewHelper.filterData(for: searchText)
-        
-    }
-}
-
-extension ViewController: WachtableDelegate{
-    func editWatchList(new id: String) {
-      //  dataModel.editToFavourites(new: id)
-      //  collectionViewHelper.setData(datas: dataModel.getFavouritesDataFromCryptoDatas(data: CryptoDatas(data: tableViewHelper.cryptoData, timestamp: nil)))
+        self.didSearched!(searchText)
     }
 }
 
@@ -104,7 +100,6 @@ extension ViewController: MainViewModelDelegate{
 extension ViewController: NavigationRequestDelegate{
     func didRequestNavigation(with index: Int) {
         var indexData = viewModel.fetchDetailsData(for: index)
-        
         navigationControllerHelper.navigate(with: .init(name: indexData?.name ?? "-",
                                                         logoName: indexData?.symbol,
                                                         id: indexData?.id ?? " ",

@@ -12,13 +12,13 @@ class ViewControllerDataModel{
     
     private let url = URL(string: "https://api.coincap.io/v2/assets")
     private let defaults = UserDefaults.standard
+    
     private var rawData: [CryptoData]?
     private var filteredRawModel: [CryptoData]?
-    func fetchData(complationHandler: @escaping (CryptoDatas) -> (Void)){
+    
+    func fetchData(completaionHandler: @escaping (()->())){
         
         let urlRequest = URLRequest(url: url!)
-        
-        
         URLSession.shared.dataTask(with: urlRequest){ [unowned self] data, response, error in
             
             if let error = error {
@@ -29,9 +29,10 @@ class ViewControllerDataModel{
                 response.statusCode == 200 {
                 do{
                     let decodedData = try JSONDecoder().decode(CryptoDatas.self, from: data)
+                    
                     self.rawData = decodedData.data
                     self.filteredRawModel = decodedData.data
-                    complationHandler(decodedData)
+                    completaionHandler()
                     return
                 } catch {
                     print("Parsing failed!")
@@ -42,44 +43,44 @@ class ViewControllerDataModel{
             
         }.resume()
     }
-    /*
-    func getData() -> [CryptoData]{
-        return filteredRawModel ?? []
+    
+    func getFilteredData() -> [CryptoData]?{
+        return self.filteredRawModel
     }
-    */
+    
+    func getRawData() -> [CryptoData]?{
+        return self.rawData
+    }
     
     func getDataAt(for index: Int) -> CryptoData?{
-        return filteredRawModel?[index]
+        return self.filteredRawModel?[index]
     }
     
+}
+
+
+// Mark:- User defaults processes.
+extension ViewControllerDataModel{
     func saveFavourites(new favourites: [String]){
         print("Saved \(favourites)")
         self.defaults.set(favourites, forKey: "Favourites")
     }
     
-    func editToFavourites(new id: String){
-        var favourites = loadFavourites()
-        
-        if favourites.contains(id){
-            saveFavourites(new: favourites.filter{ $0 != id})
-        } else {
-            favourites.append(id)
-            saveFavourites(new: favourites)
-        }
-        
-    }
-    
     func loadFavourites() -> [String]{
         return defaults.object(forKey: "Favourites") as? [String] ?? []
     }
-    
+}
 
-    
-    func getFavouritesDataFromCryptoDatas(data: CryptoDatas) -> [CryptoData]{
-        let favourites = self.loadFavourites()
-        return data.data?.filter{
-            favourites.contains($0.id ?? "")
-        } ?? []
+// Mark:- Search process.
+extension ViewControllerDataModel{
+    func filterData(for text: String) -> [CryptoData]?{
+        if text.count < 3{
+            self.filteredRawModel = self.rawData
+        } else {
+            self.filteredRawModel = self.rawData?.filter{
+                $0.name!.lowercased().contains(text.lowercased())
+            }
+        }
+        return self.filteredRawModel
     }
-    
 }

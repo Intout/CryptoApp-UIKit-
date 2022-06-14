@@ -14,9 +14,6 @@ protocol WachtableDelegate: AnyObject{
 
 class DetailsViewController: UIViewController {
 
-    var isInWatchlist: Bool?
-    var onWatchlistChanged: ((String)->())?
-    weak var delegate: WachtableDelegate? = nil
     // Icon view
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var iconView: UIView!
@@ -27,10 +24,16 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var changePercentageBackgroundView: UIView!
     @IBOutlet weak var changePercentage: UILabel!
-    
+    // Details Table
     @IBOutlet weak var detailsTableView: UITableView!
     
+    
+    
     var viewModel: DetailsViewModel!
+    // Watchlist update.
+    var isInWatchlist: Bool?
+    var onWatchlistChanged: ((String)->())?
+    
     private var detailsTableViewHelper: DetailsTableViewHelper!
     
     override func viewDidLoad() {
@@ -101,7 +104,6 @@ extension DetailsViewController: DetailsViewModelDelegate{
         self.detailsTableViewHelper.setData(data)
     }
 }
-
 
 extension UIButton{
     func didPressed(is pressed: Bool, pressedColor: UIColor, nonPressedColor: UIColor, pressedText: String, nonPressedText: String){
