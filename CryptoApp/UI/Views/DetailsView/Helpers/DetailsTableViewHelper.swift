@@ -60,7 +60,7 @@ extension DetailsTableViewHelper: UITableViewDataSource{
             cell.titleLabel.text = "Volume"
             cell.valueLabel.text = "$" + (self.data?.volume ?? "-")
         } else if indexPath.item == 2{
-            cell.titleLabel.text = "Circulization"
+            cell.titleLabel.text = "Supply"
             cell.valueLabel.text = self.data?.circulization ?? "-"
         }
         return cell
